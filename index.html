@@ -1,8 +1,32 @@
 <!DOCTYPE html>
-<div style="min-width:100px; min-height:100px; background-color:black; color:white;" id="coords">No coordinates yet</div>
+<div style="min-width:100px; min-height:500px; background-color:black; color:white;" id="coords"><button id="action-btn" style="min-height:50px;min-width:100px;">Click Me</button></div>
 
 
 <script src="phonegap.js"></script>
 <script>
-document.getElementById('coords').innerHTML = "1,2,3,4"
+
+var onSuccess = function(position) {
+    alert('Latitude: '          + position.coords.latitude          + '\n' +
+          'Longitude: '         + position.coords.longitude         + '\n' +
+          'Altitude: '          + position.coords.altitude          + '\n' +
+          'Accuracy: '          + position.coords.accuracy          + '\n' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+          'Heading: '           + position.coords.heading           + '\n' +
+          'Speed: '             + position.coords.speed             + '\n' +
+          'Timestamp: '         + position.timestamp                + '\n');
+};
+
+// onError Callback receives a PositionError object
+//
+function onError(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+}
+
+
+document.getElementById('action-btn').addEventListener("click", function() {
+alert("fires");
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}, false);
+
 </script>
